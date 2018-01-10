@@ -58,9 +58,12 @@ if __name__ == '__main__':
     # Taking a small sample for testing - will remove later
     df = df.head()
 
-    # stop_words = set(list(ENGLISH_STOP_WORDS) + ['pron'])
-    stop_words = ENGLISH_STOP_WORDS
+    # Adding domain specific stop words - will create a histogram to determine any
+    # other frequently occuring words that don't add meaning here
+    stop_words = set(list(ENGLISH_STOP_WORDS) +
+                     ['podcast', 'show', 'mp3', 'android', 'iphone', 'ipad'])
 
+    # Instantiating tfidf vectorizer
     vectorizer = TfidfVectorizer(stop_words=stop_words, tokenizer=lematize)
 
     # Getting vectors from podcast descriptions
