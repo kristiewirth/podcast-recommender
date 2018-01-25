@@ -2,7 +2,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS
 import spacy
-import re
 import string
 import os
 import pandas as pd
@@ -10,9 +9,13 @@ import numpy as np
 
 
 def lematize(docs):
+    # Remove extra spaces and periods
+    no_spaces = docs.replace('...', ' ').replace('....', ' ').replace(
+        '  ', ' ').replace('/', ' ').replace('&', 'and').replace("’", "'")
+
     # Remove punctuation
     punc_list = set(string.punctuation)
-    no_punc = ''.join([char for char in docs if char not in punc_list])
+    no_punc = ''.join([char for char in no_spaces if char not in punc_list])
 
     # Remove unicode
     printable = set(string.printable)
@@ -23,8 +26,7 @@ def lematize(docs):
     spacy_doc = nlp(no_uni)
 
     # Lemmatize and lower text
-    # re.sub is finding any non-alphanumeric chars and substituting with empty string
-    tokens = [re.sub('\W+', '', token.lemma_.lower()) for token in spacy_doc]
+    tokens = [token.lemma_.lower() for token in spacy_doc]
     return tokens
 
 
@@ -56,7 +58,7 @@ if __name__ == '__main__':
     df.reset_index(inplace=True, drop=True)
 
     # Taking a small sample for testing - will remove later
-    df = df.head()
+    df = df.head(12)
 
     # Adding domain specific stop words - will create a histogram to determine any
     # other frequently occuring words that don't add meaning here
@@ -82,6 +84,5 @@ if __name__ == '__main__':
     np.place(cos_sims, cos_sims >= 0.99, 0)
 
     # Getting the podcast that is most similar for each podcast
-    # most_similar = cos_sims.argmax(axis=0)
     most_similar = cos_sims.argsort(axis=1)[::-1]
-    df['most_similar'] = list(df['name'][most_similar])
+    df['most_similar'] = [list(df['name'][x]) for x in most_similar[:, :10]]
