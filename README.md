@@ -1,10 +1,25 @@
-# Find Your New Favorite Podcast!
+## Find Your New Favorite Podcast!
 
 <img src='images/mic-image.jpg' width='400'>
+
+### Introduction
 
 This project aims to provide recommendations for new podcasts based on the podcasts you already know and love. Using methods such as natural language processing, cosine similarities, and Flask, this interactive tool will be useful for anyone wishing to expand their current podcast library.
 
 This project is currently in progress, so stay tuned for more updates!
+
+### Data
+
+* [Podcast dataset](https://github.com/ageitgey/all-podcasts-dataset)
+
+### Methods
+
+The first step in this project was to process the podcast description text into a machine-readable form using Natural Language Processing.
+
+Steps taken in the cleaning process included:
+* Changing all text to lowercase
+* Lemmatizing the text (i.e., reducing a word to its stem and utilizing contextual information)
+* Removing stop words from the text (i.e., commonly used words such as 'the' and 'a')
 
 ### Repository Layout
 
@@ -37,16 +52,20 @@ This project is currently in progress, so stay tuned for more updates!
     │
     ├── deliverables/           <- Final output for the project - presentation slides, written analysis, etc.
 
-### Data Sources
-* [Podcast dataset](https://github.com/ageitgey/all-podcasts-dataset)
+### Results and Applications
 
-### Technologies Used
 Coming soon.
 
-### Methods
-Coming soon.
+|Measure|Final Test Score|
+| :-------------: |:-------------:|
+|_|_|
 
-### Findings and Applications
-Coming soon.
+### Tech Stack
 
-<i>Acknowledgements:</i> Github layout inspired by the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>.
+* Python
+* Pandas
+* Spacy
+
+### References and Acknowledgements
+
+* Repository layout inspired by the [cookiecutter data science project template](https://drivendata.github.io/cookiecutter-data-science/).
